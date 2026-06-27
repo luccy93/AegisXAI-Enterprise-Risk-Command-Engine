@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual Environment
+venv/
+.env
+*.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Data
+*.csv
+!data/*.csv
+
+# Reports
+reports/*.pdf
+reports/*.xlsx
+reports/*.csv
+
+# Logs
+logs/*.log
+logs/*.log.*
+
+# Models
+models/*.pkl
+models/*.json
+models/*.ubj
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+.docker/
+
+# Testing
+.pytest_cache/
+htmlcov/
+.coverage
+coverage/
