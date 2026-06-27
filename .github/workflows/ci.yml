@@ -1,0 +1,67 @@
+name: AegisXAI CI/CD
+
+on:
+  push:
+    branches: [ master, main, develop ]
+  pull_request:
+    branches: [ master, main ]
+
+env:
+  PYTHON_VERSION: "3.11"
+
+jobs:
+  syntax-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - run: python -m py_compile app.py
+      - run: python -m py_compile aegisxai/app.py
+
+  test:
+    needs: syntax-check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: "pip"
+      - run: pip install -r aegisxai/requirements.txt
+      - name: Generate test dataset
+        run: python generate_large_dataset.py
+      - run: pip install pytest pytest-cov
+      - run: cd aegisxai && pytest tests/ -v --cov=. --cov-report=term-missing
+        env:
+          PYTHONPATH: ${{ github.workspace }}/aegisxai
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - run: pip install ruff
+      - run: ruff check aegisxai/ app.py --ignore=E501,F403,F405,E402
+
+  docker:
+    needs: [syntax-check, test, lint]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: aegisxai/Dockerfile
+          push: true
+          tags: ghcr.io/${{ github.repository }}:latest

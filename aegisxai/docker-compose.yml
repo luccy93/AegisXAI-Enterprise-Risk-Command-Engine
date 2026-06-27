@@ -2,29 +2,32 @@ version: "3.8"
 
 services:
   app:
-    build: .
+    build:
+      context: ..
+      dockerfile: aegisxai/Dockerfile
     ports:
       - "8501:8501"
     env_file:
-      - .env
+      - aegisxai/.env
     volumes:
-      - ./data:/app/data
-      - ./models:/app/models
-      - ./logs:/app/logs
-      - ./reports:/app/reports
+      - aegisxai_data:/app/aegisxai/data
+      - aegisxai_logs:/app/logs
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8501/_stcore/health')"]
+      test: ["CMD", "python", "aegisxai/healthcheck.py"]
       interval: 30s
       timeout: 10s
       retries: 3
-      start_period: 30s
+      start_period: 60s
     deploy:
       resources:
         limits:
           memory: 2G
         reservations:
           memory: 1G
+    labels:
+      - "aegisxai.component=streamlit"
+      - "aegisxai.version=4.0.0"
 
   postgres:
     image: postgres:16-alpine
@@ -42,3 +45,5 @@ services:
 
 volumes:
   postgres_data:
+  aegisxai_data:
+  aegisxai_logs:
