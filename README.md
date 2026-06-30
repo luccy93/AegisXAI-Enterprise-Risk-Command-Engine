@@ -131,6 +131,21 @@ pytest tests/ -v
 
 ---
 
+## ☁️ Deploy on Streamlit Community Cloud
+
+1. Push this repo to GitHub
+2. Go to [share.streamlit.io](https://share.streamlit.io) and click **New app**
+3. Select your repo, branch (`master`), and main file (`app.py`)
+4. Click **Deploy**
+
+The app auto-generates a 50K-row dataset on first cold start (the full 500K can be regenerated via `python generate_large_dataset.py`).
+
+**Optional secrets** (set via Streamlit Cloud dashboard → Advanced settings):
+- `CSV_PATH` — custom dataset path
+- `LOG_LEVEL` — `DEBUG`, `INFO`, `WARNING`
+
+---
+
 ## 📄 License
 
 MIT — see `aegisxai/LICENSE`.

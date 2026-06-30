@@ -7,6 +7,9 @@ __pycache__/
 logs/
 **/__pycache__/
 *.csv
+aegisxai/data/*.csv
+data/*.csv
+**/data/*.csv
 backend/
 aegisxai-fullstack/
 generate_large_dataset.py

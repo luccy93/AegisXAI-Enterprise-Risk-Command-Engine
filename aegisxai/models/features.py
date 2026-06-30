@@ -8,7 +8,12 @@ from ..config.settings import Settings
 def load_data(csv_path=None):
     if csv_path is None:
         csv_path = Settings.CSV_PATH
-    df = pd.read_csv(csv_path)
+    try:
+        df = pd.read_csv(csv_path)
+    except FileNotFoundError:
+        from aegisxai.utils.bootstrap import ensure_dataset
+        csv_path = ensure_dataset(csv_path)
+        df = pd.read_csv(csv_path)
     df["TotalCharges"] = pd.to_numeric(df["TotalCharges"], errors="coerce")
     df.dropna(inplace=True)
     return df
