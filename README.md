@@ -1,5 +1,7 @@
 # ⚡ AegisXAI — Enterprise Risk Command Engine
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://aegisxai-enterprise-risk-command-engine-aqfb3dpxmxp3rzp5pswydm.streamlit.app)
+
 **AegisXAI** is a production-grade, enterprise churn prediction and risk mitigation platform with Bloomberg-terminal aesthetics, 84+ interactive dashboards, and a fully modular 60+ file Python architecture.
 
 ---
