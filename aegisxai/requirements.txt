@@ -29,7 +29,7 @@ python-jose==3.3.0
 
 # Reports
 openpyxl==3.1.2
-reportlab==4.2.0
+reportlab==5.0.0
 fpdf2==2.7.9
 
 # Utils
