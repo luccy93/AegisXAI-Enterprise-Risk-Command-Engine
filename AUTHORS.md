@@ -3,9 +3,6 @@
 ## Maintainer
 - **luccy93** — Project owner and maintainer
 
-## Contributors
-- **DEEPAKPURI-G** — Early adopter, testing, and feedback
-
 ## How to contribute
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
