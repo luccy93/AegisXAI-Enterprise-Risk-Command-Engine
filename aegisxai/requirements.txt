@@ -33,7 +33,7 @@ reportlab==4.2.0
 fpdf2==2.7.9
 
 # Utils
-httpx==0.27.0
+httpx==0.28.1
 pydantic==2.7.3
 pydantic-settings==2.2.1
 
