@@ -4,6 +4,8 @@
 
 **AegisXAI** is a production-grade, enterprise churn prediction and risk mitigation platform with Bloomberg-terminal aesthetics, 84+ interactive dashboards, and a fully modular 60+ file Python architecture.
 
+🔗 **Live Demo:** [aegisxai-enterprise-risk-command-engine.streamlit.app](https://aegisxai-enterprise-risk-command-engine-aqfb3dpxmxp3rzp5pswydm.streamlit.app)
+
 ---
 
 ## 🚀 Quick Start
